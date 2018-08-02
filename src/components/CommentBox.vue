@@ -31,7 +31,7 @@
     methods: {
       onSubmitB() {
         let comment = {
-          id: (this.comments.length + 1).toString(),
+          id: 2,
           body: this.message
         };
 //        this.$store.commit("addComment", comment);//同步请求

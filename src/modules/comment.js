@@ -8,19 +8,24 @@ const mutations = {
   addCommentm(state, comment) {
     state.all.push(comment)
   }
+  ,
+  loadCommentsm(state, comments) {
+    state.all = comments
+  }
 };
 
 const actions = {
-  addComment({commit}) {
 
+  addComment({commit, comment}) {
     commit("addCommentm", comment)
   },
-  loadComments({commit}){
+
+  loadComments({commit}) {
     const uri = 'http://localhost:3008/comments'
     axios.get(uri).then(
-      res =>{
+      res => {
         let comments = res.data
-        commit("loadComments",comments)
+        commit("loadCommentsm", comments)
       }
     );
   }
