@@ -1,13 +1,7 @@
+import axios from 'axios'
+
 const state = {
-  all: [
-    {
-      id: '1',
-      body: '12222222'
-    }, {
-      id: '2',
-      body: '233333333'
-    }
-  ]
+  all: []
 };
 
 const mutations = {
@@ -17,8 +11,18 @@ const mutations = {
 };
 
 const actions = {
-  addComment({commit}, {comment}) {
+  addComment({commit}) {
+
     commit("addCommentm", comment)
+  },
+  loadComments({commit}){
+    const uri = 'http://localhost:3008/comments'
+    axios.get(uri).then(
+      res =>{
+        let comments = res.data
+        commit("loadComments",comments)
+      }
+    );
   }
 };
 
