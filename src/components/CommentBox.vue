@@ -15,26 +15,40 @@
 
 <script>
   export default {
+
     name: 'CommentBox',
+
     data: () => ({
       message: ''
     }),
+
     computed: {
+      postId() {
+        return this.$route.params.id;
+      }
+      ,
       comments() {
-        return this.$store.state.comment.all
+        return  this.$store.getters.getComments(this.postId)
       }
       ,
       reversedComments() {
         return this.comments.slice().reverse();
-      }
+      },
+
+
     },
+
     methods: {
+
       onSubmitB() {
+
         let comment = {
-          id: 2,
-          body: this.message
+          body: this.message,
+          post: this.postId
         };
-//        this.$store.commit("addComment", comment);//同步请求
+
+//      this.$store.commit("addComment", comment);//同步请求
+
         this.$store.dispatch({type: "addComment", comment});//DISPATCH
         this.message = ''
       }

@@ -7,7 +7,8 @@
 <script>
   export default {
     name: 'App',
-    created:function () {
+    created: function () {
+      this.$store.dispatch({type: "getAllPosts"});
       this.$store.dispatch({type: "loadComments"})
     }
   }
